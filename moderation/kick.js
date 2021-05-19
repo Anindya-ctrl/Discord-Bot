@@ -1,7 +1,7 @@
 function kick(client, Discord, message) {
         const { member, mentions, author } = message;
         
-        if(!member.hasPermission('ADMINISTRATOR') && !member.hasPermission('BAN_MEMBERS')) {
+        if(!member.hasPermission('ADMINISTRATOR') && !member.hasPermission('KICK_MEMBERS')) {
             return message.reply('you do not have the required permission to run this command, sed lol~');
         }
 
