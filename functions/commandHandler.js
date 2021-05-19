@@ -4,6 +4,8 @@ function commandHandler(client, aliases, callback) {
     if(typeof aliases === 'string') aliases = [ aliases ];
 
     client.on('message', message => {
+        if(message.author.bot) return ;
+
         const PREFIX = process.env.PREFIX;
         const { content } = message;
 
