@@ -2,8 +2,7 @@ require('dotenv').config();
 
 function commandHandler(client, aliases, callback) {
     client.on('message', message => {
-        if(message.author.bot) return ;
-        if(message.channel.type === 'dm') return ;
+        if(message.author.bot || message.channel.type === 'dm') return ;
         
         if(typeof aliases === 'string') aliases = [ aliases ];
 
