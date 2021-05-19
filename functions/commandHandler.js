@@ -1,10 +1,11 @@
 require('dotenv').config();
 
 function commandHandler(client, aliases, callback) {
-    if(typeof aliases === 'string') aliases = [ aliases ];
-
     client.on('message', message => {
         if(message.author.bot) return ;
+        if(message.channel.type === 'dm') return ;
+        
+        if(typeof aliases === 'string') aliases = [ aliases ];
 
         const PREFIX = process.env.PREFIX;
         const { content } = message;
