@@ -3,6 +3,7 @@ const client = new Discord.Client();
 
 const command = require('./functions/commandHandler');
 const kick = require('./moderation/kick');
+const ban = require('./moderation/ban');
 require('dotenv').config();
 
 client.on('ready', () => console.log('CringeGod69 is ready to make everyone cringe~'));
@@ -15,6 +16,8 @@ command(client, [ 'ping', 'hi', 'test' ], message => {
 
 // MODERATION
 command(client, 'kick', message => kick(message));
+
+command(client, 'ban', message => ban(message));
 
 // MUSIC [COMING SOON]
 // FUN [COMING SOON]
