@@ -1,5 +1,5 @@
-function ban(message) {
-    const { member, mentions } = message;
+function ban(client, Discord, message) {
+    const { member, mentions, author } = message;
     
     if(!member.hasPermission('ADMINISTRATOR') && !member.hasPermission('BAN_MEMBERS')) {
         return message.reply('you do not have the required permission to run this command, sed lol~');
@@ -16,7 +16,14 @@ function ban(message) {
         const targetMember = message.guild.members.cache.get(targetUser.id);
 
         targetMember.ban().then(() => {
-            message.reply(`banned the shit out, won't be able to move for a while :smiling_face_with_tear:`);
+            const banEmbed = new Discord.MessageEmbed()
+                .setTitle('Banned the shit out :smiling_face_with_tear:')
+                .addField('Banned', targetMember)
+                .addField('Responsible member', author)
+                .setFooter('Time:', client.user.displayAvatarURL())
+                .setTimestamp();
+
+            message.reply(banEmbed);
         }).catch(error => {
             message.reply('shit an unexpected error just occured...');
             console.error(error);

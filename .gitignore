@@ -4,3 +4,4 @@ node_modules
 music
 fun
 .env
+/moderation/unban.js
