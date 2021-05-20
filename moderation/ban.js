@@ -1,3 +1,5 @@
+const getRandomHexColor = require('../functions/getRandomHexColor');
+
 function ban(client, Discord, message) {
     const { member, mentions, author } = message;
     
@@ -17,6 +19,7 @@ function ban(client, Discord, message) {
 
         targetMember.ban().then(() => {
             const banEmbed = new Discord.MessageEmbed()
+                .setColor(getRandomHexColor())
                 .setTitle('Banned the shit out :smiling_face_with_tear:')
                 .addField('Banned', targetMember)
                 .addField('Responsible member', author)
@@ -25,7 +28,7 @@ function ban(client, Discord, message) {
 
             message.reply(banEmbed);
         }).catch(error => {
-            message.reply('shit an unexpected error just occured...');
+            message.reply('shit an unexpected error just occured... :smiling_face_with_tear:');
             console.error(error);
         }); 
     }
