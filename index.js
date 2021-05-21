@@ -14,7 +14,7 @@ const unban = require('./moderation/unban');
 // OTHERS
 const getUserInfo = require('./others/getUserInfo');
 
-require('dotenv').config();
+// require('dotenv').config();
 
 client.on('ready', () => console.log('CringeGod69 is ready to make everyone cringe~'));
 

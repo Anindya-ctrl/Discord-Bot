@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 function commandHandler(client, aliases, callback) {
     client.on('message', message => {
