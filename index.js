@@ -16,7 +16,16 @@ const getUserInfo = require('./others/getUserInfo');
 
 // require('dotenv').config();
 
-client.on('ready', () => console.log('CringeGod69 is ready to make everyone cringe~'));
+client.on('ready', () => {
+    console.log('CringeGod69 is ready to make everyone cringe~');
+
+    client.user.setPresence({
+        activity: {
+            name: '~/help',
+            type: 'PLAYING',
+        },
+    });
+});
 
 // TEST
 command(client, [ 'ping', 'hi', 'test' ], message => {
