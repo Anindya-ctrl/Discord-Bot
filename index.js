@@ -6,7 +6,7 @@ const command = require('./functions/commandHandler');
 // MODERATION
 const kick = require('./moderation/kick');
 const ban = require('./moderation/ban');
-const unban = require('./moderation/unban');
+// const unban = require('./moderation/unban');
 
 // MUSIC [COMING SOON]
 // FUN [COMING SOON]
