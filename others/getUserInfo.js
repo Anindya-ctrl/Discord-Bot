@@ -14,6 +14,7 @@ function getUserInfo(client, Discord, message) {
         message.reply('bruh... you actually didn\'t mention a valid member lol~');
     } else {
         const targetMember = guild.members.cache.get(targetUser.id);
+        const targetMemberRoles = targetMember.roles.cache.map(role =>`${ role }`);
 
         const InfoEmbed = new Discord.MessageEmbed()
             .setColor(getRandomHexColor())
@@ -24,7 +25,7 @@ function getUserInfo(client, Discord, message) {
             .addField('Bot', `${ targetUser.bot }`)
             .addField('Joined on', moment.utc(targetMember.joinedAt).format('dddd, MMMM Do, YYYY'))
             .addField('Account created on', moment.utc(targetUser.createdAt).format('dddd, MMMM Do, YYYY'))
-            .addField('Roles', targetMember.roles.cache.map(role =>`${ role }`).join(', '))
+            .addField(`Roles(${ targetMemberRoles.length })`, targetMemberRoles.join(', '))
             .addField('Requested by', `${ message.author.username }#${ message.author.discriminator }`)
             .setFooter('Time:', client.user.displayAvatarURL())
             .setTimestamp();
