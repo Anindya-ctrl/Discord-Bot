@@ -13,15 +13,17 @@ const ban = require('./moderation/ban');
 
 // OTHERS
 const getUserInfo = require('./others/getUserInfo');
+const getServerInfo = require('./others/getServerInfo');
+// const help = require('./others/help');
 
 // require('dotenv').config();
 
 client.on('ready', () => {
-    console.log('CringeGod69 is ready to make everyone cringe~');
+    console.log('ready to roll~');
 
     client.user.setPresence({
         activity: {
-            name: '~/help',
+            name: 'in development',
             type: 'PLAYING',
         },
     });
@@ -29,13 +31,11 @@ client.on('ready', () => {
 
 // TEST
 command(client, [ 'ping', 'hi', 'test' ], message => {
-    if(!message.member.hasPermission('BAN_MEMBERS')) return ;
-    else message.channel.send('pong');
+    message.channel.send('pong');
 });
 
 // MODERATION
 command(client, 'kick', message => kick(client, Discord, message));
-
 command(client, 'ban', message => ban(client, Discord, message));
 
 // command(client, 'unban', message => unban(message));
@@ -44,7 +44,8 @@ command(client, 'ban', message => ban(client, Discord, message));
 // FUN [COMING SOON]
 
 // OTHERS
-
 command(client, 'reveal', message => getUserInfo(client, Discord, message));
+command(client, 'serverInfo', message => getServerInfo(client, Discord, message));
+// command(client, 'help', message => help(client, Discord, message));
 
 client.login(process.env.BOT_TOKEN);

@@ -2,11 +2,7 @@ const getRandomHexColor = require('../functions/getRandomHexColor');
 const moment = require('moment');
 
 function getUserInfo(client, Discord, message) {
-    const { member, mentions, guild } = message;
-
-    if(!member.hasPermission('ADMINISTRATOR')) {
-        return message.reply('you do not have the required permission to run this command, sed lol~');
-    }
+    const { mentions, guild, author } = message;
 
     const targetUser = mentions.users.first();
 
@@ -17,6 +13,7 @@ function getUserInfo(client, Discord, message) {
         const targetMemberRoles = targetMember.roles.cache.map(role =>`${ role }`);
 
         const InfoEmbed = new Discord.MessageEmbed()
+            .setTitle('**User Reveal :eyes:**')
             .setColor(getRandomHexColor())
             .setThumbnail(targetUser.avatarURL() || 'https://cdn.discordapp.com/embed/avatars/0.png')
             .addField('Username', targetUser.username)
@@ -26,7 +23,7 @@ function getUserInfo(client, Discord, message) {
             .addField('Joined on', moment.utc(targetMember.joinedAt).format('dddd, MMMM Do, YYYY'))
             .addField('Account created on', moment.utc(targetUser.createdAt).format('dddd, MMMM Do, YYYY'))
             .addField(`Roles(${ targetMemberRoles.length })`, targetMemberRoles.join(', '))
-            .addField('Requested by', `${ message.author.username }#${ message.author.discriminator }`)
+            .addField('Requested by', author)
             .setFooter('Time:', client.user.displayAvatarURL())
             .setTimestamp();
 

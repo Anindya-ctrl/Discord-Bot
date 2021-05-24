@@ -4,15 +4,15 @@ function ban(client, Discord, message) {
     const { member, mentions, author } = message;
     
     if(!member.hasPermission('ADMINISTRATOR') && !member.hasPermission('BAN_MEMBERS')) {
-        return message.reply('you do not have the required permission to run this command, sed lol~');
+        return message.reply('you do not have the required permission to run this command');
     }
 
     const targetUser = mentions.users.first();
 
     if(!targetUser) {
-        message.reply('bruh... you actually didn\'t mention a valid member lol~');
+        message.reply('you didn\'t mention a valid member lol~');
     } else if(message.author.id === targetUser.id) {
-        message.reply('you dumdum trynna ban yourself lol you depressed or something?');
+        message.reply('you dumdum trynna ban yourself you depressed or something?');
     } else {
         // BAN THE SHIT OUT
         const targetMember = message.guild.members.cache.get(targetUser.id);
@@ -28,7 +28,7 @@ function ban(client, Discord, message) {
 
             message.reply(banEmbed);
         }).catch(error => {
-            message.reply('shit an unexpected error just occured... :smiling_face_with_tear:');
+            message.reply('an unexpected error occured while processing your command... :smiling_face_with_tear:');
             console.error(error);
         }); 
     }
