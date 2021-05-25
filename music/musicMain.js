@@ -11,7 +11,7 @@ async function musicMain(message) {
         const permissions = voiceChannel.permissionsFor(client.user);
         if(!permissions.has('CONNECT') || !permissions.has('SPEAK')) return message.reply('please make sure I have the required permissions to connect and speak in that channel~');
     
-        const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        const urlPattern = new RegExp('^(https:\\/\\/)'+ // protocol
             '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
             '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
             '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
