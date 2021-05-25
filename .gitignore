@@ -1,7 +1,7 @@
 node_modules
 
 # COMING SOON
-music
+/music/play.js
 fun
 .env
 /moderation/unban.js

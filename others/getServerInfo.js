@@ -1,9 +1,6 @@
-// const Discord = require('discord.js');
-// const client = new Discord.Client();
 const getRandomHexColor = require("../functions/getRandomHexColor");
 
 function getServerInfo(client, Discord, message) {
-    // client.on('message', message => {
         const { guild, author } = message;
         const { name, owner, region, memberCount, createdAt, emojis, afkTimeout } = guild;
         const guildEmojis = emojis.cache.map(emoji => `${ emoji }`);
@@ -18,13 +15,12 @@ function getServerInfo(client, Discord, message) {
             .addField('Member count', memberCount)
             .addField('Created on', createdAt)
             .addField('AFK timeout', `${ afkTimeout / 60 }min`)
-            .addField(`Emojis(${ guildEmojis.length })`, `${ guildEmojis.join(' ') }`)
+            .addField(`Emoji(s)`, guildEmojis.length > 0 ? guildEmojis.length : 'N/A')
             .addField('Requested by', author)
             .setFooter('Time:', client.user.displayAvatarURL())
             .setTimestamp();
 
             message.reply(InfoEmbed);
-    // });
 }
 
 module.exports = getServerInfo;

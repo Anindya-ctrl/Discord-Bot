@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+client.setMaxListeners(100);
 
 const command = require('./functions/commandHandler');
 
@@ -8,7 +9,9 @@ const kick = require('./moderation/kick');
 const ban = require('./moderation/ban');
 // const unban = require('./moderation/unban');
 
-// MUSIC [COMING SOON]
+// MUSIC
+const music = require('./music/musicMain');
+
 // FUN [COMING SOON]
 
 // OTHERS
@@ -41,11 +44,13 @@ command(client, 'ban', message => ban(client, Discord, message));
 // command(client, 'unban', message => unban(message));
 
 // MUSIC [COMING SOON]
+command(client, 'play', message => music(message));
+
 // FUN [COMING SOON]
 
 // OTHERS
 command(client, 'reveal', message => getUserInfo(client, Discord, message));
 command(client, 'serverInfo', message => getServerInfo(client, Discord, message));
-// command(client, 'help', message => help(client, Discord, message));
+command(client, 'help', message => help(client, Discord, message));
 
 client.login(process.env.BOT_TOKEN);
