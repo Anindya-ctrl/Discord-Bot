@@ -34,7 +34,7 @@ async function covid(client, Discord, message) {
         .addField('Percentage of tests', `${testsPerOneMillion / 10000}%`, true)
         .addField('Requested by', author)
         .setFooter('Time:', client.user.displayAvatarURL())
-        .setTimestamp();;
+        .setTimestamp();
 
     initialMessage.delete();
     channel.send(COVIDEmbed);

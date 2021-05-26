@@ -1,1 +1,9 @@
 GET https://coronavirus-19-api.herokuapp.com/countries/usa
+
+###
+
+GET https://api.thecatapi.com/v1/images/search
+
+###
+
+GET https://api.thedogapi.com/v1/images/search

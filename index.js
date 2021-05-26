@@ -15,7 +15,9 @@ const covid = require('./info/covid');
 // MUSIC
 const music = require('./music/musicMain');
 
-// FUN [COMING SOON]
+// FUN
+const cat = require('./fun/cat');
+const dog = require('./fun/dog');
 
 // OTHERS
 const getUserInfo = require('./others/getUserInfo');
@@ -48,10 +50,12 @@ command(client, 'ban', message => ban(client, Discord, message));
 // INFO
 command(client, 'covid', message => covid(client, Discord, message));
 
-// MUSIC [COMING SOON]
+// MUSIC
 command(client, 'play', message => music(message));
 
-// FUN [COMING SOON]
+// FUN
+command(client, 'cat', message => cat(client, Discord, message));
+command(client, 'dog', message => dog(client, Discord, message));
 
 // OTHERS
 command(client, 'reveal', message => getUserInfo(client, Discord, message));
