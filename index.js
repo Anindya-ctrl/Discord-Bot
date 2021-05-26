@@ -24,7 +24,7 @@ const getUserInfo = require('./others/getUserInfo');
 const getServerInfo = require('./others/getServerInfo');
 // const help = require('./others/help');
 
-// require('dotenv').config();
+require('dotenv').config();
 
 client.on('ready', () => {
     console.log('ready to roll~');
