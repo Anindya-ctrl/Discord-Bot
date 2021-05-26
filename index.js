@@ -9,6 +9,9 @@ const kick = require('./moderation/kick');
 const ban = require('./moderation/ban');
 // const unban = require('./moderation/unban');
 
+// INFO
+const covid = require('./info/covid');
+
 // MUSIC
 const music = require('./music/musicMain');
 
@@ -19,7 +22,7 @@ const getUserInfo = require('./others/getUserInfo');
 const getServerInfo = require('./others/getServerInfo');
 // const help = require('./others/help');
 
-// require('dotenv').config();
+require('dotenv').config();
 
 client.on('ready', () => {
     console.log('ready to roll~');
@@ -40,8 +43,10 @@ command(client, [ 'ping', 'hi', 'test' ], message => {
 // MODERATION
 command(client, 'kick', message => kick(client, Discord, message));
 command(client, 'ban', message => ban(client, Discord, message));
-
 // command(client, 'unban', message => unban(message));
+
+// INFO
+command(client, 'covid', message => covid(client, Discord, message));
 
 // MUSIC [COMING SOON]
 command(client, 'play', message => music(message));
@@ -51,6 +56,6 @@ command(client, 'play', message => music(message));
 // OTHERS
 command(client, 'reveal', message => getUserInfo(client, Discord, message));
 command(client, 'serverInfo', message => getServerInfo(client, Discord, message));
-command(client, 'help', message => help(client, Discord, message));
+// command(client, 'help', message => help(client, Discord, message));
 
 client.login(process.env.BOT_TOKEN);
