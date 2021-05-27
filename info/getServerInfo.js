@@ -17,7 +17,7 @@ function getServerInfo(client, Discord, message) {
             .addField('AFK timeout', `${ afkTimeout / 60 }min`)
             .addField(`Emoji(s)`, guildEmojis.length > 0 ? guildEmojis.length : 'N/A')
             .addField('Requested by', author)
-            .setFooter('Time:', client.user.displayAvatarURL())
+            .setFooter('Time', client.user.displayAvatarURL())
             .setTimestamp();
 
             message.reply(InfoEmbed);

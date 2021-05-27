@@ -11,6 +11,8 @@ const ban = require('./moderation/ban');
 
 // INFO
 const covid = require('./info/covid');
+const getUserInfo = require('./info/getUserInfo');
+const getServerInfo = require('./info/getServerInfo');
 
 // MUSIC
 const music = require('./music/musicMain');
@@ -20,8 +22,6 @@ const cat = require('./fun/cat');
 const dog = require('./fun/dog');
 
 // OTHERS
-const getUserInfo = require('./others/getUserInfo');
-const getServerInfo = require('./others/getServerInfo');
 // const help = require('./others/help');
 
 // require('dotenv').config();
@@ -49,6 +49,8 @@ command(client, 'ban', message => ban(client, Discord, message));
 
 // INFO
 command(client, 'covid', message => covid(client, Discord, message));
+command(client, 'reveal', message => getUserInfo(client, Discord, message));
+command(client, 'serverInfo', message => getServerInfo(client, Discord, message));
 
 // MUSIC
 command(client, 'play', message => music(message));
@@ -58,8 +60,6 @@ command(client, 'cat', message => cat(client, Discord, message));
 command(client, 'dog', message => dog(client, Discord, message));
 
 // OTHERS
-command(client, 'reveal', message => getUserInfo(client, Discord, message));
-command(client, 'serverInfo', message => getServerInfo(client, Discord, message));
 // command(client, 'help', message => help(client, Discord, message));
 
 client.login(process.env.BOT_TOKEN);

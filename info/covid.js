@@ -35,7 +35,7 @@ async function covid(client, Discord, message) {
         .addField('Percentage of deaths', getPercentageIfNumber(deathsPerOneMillion), true)
         .addField('Percentage of tests', getPercentageIfNumber(testsPerOneMillion), true)
         .addField('Requested by', author)
-        .setFooter('Time:', client.user.displayAvatarURL())
+        .setFooter('Time', client.user.displayAvatarURL())
         .setTimestamp();
 
     initialMessage.delete();

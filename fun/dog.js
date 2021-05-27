@@ -16,7 +16,7 @@ async function cat(client, Discord, message) {
         .setTitle('Random dog image :dog:')
         .setImage(data[0].url)
         .addField('Requested by', author)
-        .setFooter('Time:', client.user.displayAvatarURL())
+        .setFooter('Time', client.user.displayAvatarURL())
         .setTimestamp();
 
     initialMessage.delete();

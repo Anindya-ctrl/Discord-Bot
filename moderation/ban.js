@@ -23,7 +23,7 @@ function ban(client, Discord, message) {
                 .setTitle('Banned the shit out :smiling_face_with_tear:')
                 .addField('Banned', targetMember)
                 .addField('Responsible member', author)
-                .setFooter('Time:', client.user.displayAvatarURL())
+                .setFooter('Time', client.user.displayAvatarURL())
                 .setTimestamp();
 
             message.reply(banEmbed);

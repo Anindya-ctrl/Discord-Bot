@@ -23,7 +23,7 @@ function kick(client, Discord, message) {
                 .setTitle('Kicked the shit out :smiling_face_with_tear:')
                 .addField('Kicked', targetUser)
                 .addField('Responsible member', author)
-                .setFooter('Time:', client.user.displayAvatarURL())
+                .setFooter('Time', client.user.displayAvatarURL())
                 .setTimestamp();
 
             message.reply(kickEmbed);
