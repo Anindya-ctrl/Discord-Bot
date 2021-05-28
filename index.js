@@ -5,7 +5,7 @@ client.setMaxListeners(100);
 // FUNCTIONS
 const command = require('./functions/commandHandler');
 
-require('dotenv').config();
+// require('dotenv').config();
 
 client.on('ready', () => {
     console.log('ready to roll~');
