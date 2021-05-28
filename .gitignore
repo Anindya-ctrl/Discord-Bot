@@ -5,4 +5,3 @@ node_modules
 .env
 /moderation/unban.js
 /others/help.js
-schema

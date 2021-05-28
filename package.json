@@ -6,7 +6,6 @@
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^4.3.0",
     "moment": "^2.29.1",
-    "mongoose": "^5.12.11",
     "ytdl-core": "^4.8.0"
   },
   "name": "cringegod69",
