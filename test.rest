@@ -7,3 +7,7 @@ GET https://api.thecatapi.com/v1/images/search
 ###
 
 GET https://api.thedogapi.com/v1/images/search
+
+###
+
+GET https://nekos.life/api/v2/endpoints

@@ -4,6 +4,8 @@ client.setMaxListeners(100);
 
 // FUNCTIONS
 const command = require('./functions/commandHandler');
+const { deletedMessages, catchDeletedMessages } = require('./functions/catchDeletedMessages');
+catchDeletedMessages(client);
 
 // require('dotenv').config();
 
@@ -16,29 +18,6 @@ client.on('ready', () => {
             type: 'PLAYING',
         },
     });
-
-});
-
-const deletedMessages = new Map();
-
-client.on('messageDelete', message => {
-    const { content, author, guild } = message;
-    const { id } = guild;
-    const deletedMessagesForThisGuild = deletedMessages.get(id)
-
-    if(deletedMessagesForThisGuild) {
-        if(deletedMessagesForThisGuild.length >= 10) deletedMessagesForThisGuild.shift();
-
-        deletedMessages.set(id, [...deletedMessagesForThisGuild, {
-            member: author,
-            message: content,
-        }]);
-    } else {
-        deletedMessages.set(id, [{
-            member: author,
-            message: content,
-        }]);
-    }
 });
 
 // TEST
@@ -76,7 +55,7 @@ const snipe = require('./fun/snipe');
 
 command(client, 'cat', message => cat(client, Discord, message));
 command(client, 'dog', message => dog(client, Discord, message));
-command(client, [ 'sp', 'snipe' ], message => snipe(client, Discord, message, deletedMessages));
+command(client, [ 'sp', 'snipe' ], message => snipe(Discord, message, deletedMessages));
 
 // OTHERS
 // const help = require('./others/help');
