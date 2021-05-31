@@ -3,7 +3,7 @@ const moment = require('moment');
 
 function catchDeletedMessages(client) {
     client.on('messageDelete', message => {
-        const sentAt = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
+        const sentAt = moment();
         
         const { content, author, guild, attachments } = message;
         if(author.bot) return ;

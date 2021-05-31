@@ -21,7 +21,7 @@ function snipe(Discord, message, deletedMessages) {
         .setColor(getRandomHexColor())
         .setTitle('Got exposed b- :smiling_face_with_tear:')
         .addField('Member', responsibleMember)
-        .setFooter(`Sent at • ${ sentAt } `)
+        .setFooter(`Sent • ${ sentAt.fromNow() }`)
 
     message.reply(
         text && attachmentURL ? snipeEmbed.addField('Message', (text.length <= 1000 ? text : `${ text.slice(0, 1000) }...`)).setImage(attachmentURL)
