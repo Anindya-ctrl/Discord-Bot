@@ -5,3 +5,6 @@ node_modules
 .env
 /moderation/unban.js
 /others/help.js
+functions/validatePermissions.js
+functions/readCommands.js
+commands

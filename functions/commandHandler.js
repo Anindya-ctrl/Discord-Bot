@@ -7,15 +7,15 @@ function commandHandler(client, aliases, callback) {
         const PREFIX = process.env.PREFIX;
         const { content } = message;
 
-        aliases.forEach(alias => {
+        for(const alias of aliases) {
             const command = `${ PREFIX }${ alias }`;
 
-            if(content === command || content.startsWith(command)) {
+            if(content === command || content.startsWith(`${ command } `)) {
                 console.log(`Running the command -> ${ command }`);
 
-                callback(message);
+                return callback(message);
             }
-        });
+        }
     });
 }
 
