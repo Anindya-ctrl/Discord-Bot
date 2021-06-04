@@ -8,7 +8,7 @@ async function onMemberJoin(member) {
     let welcomeDataForThisGuild = welcomeMessageCache[guildId];
 
     if(!welcomeDataForThisGuild) {
-        await connectToMongoDB().then(async mongoose => {
+        await connectToMongoDB('moderation').then(async mongoose => {
             try {
                 console.log('fetching from database~');
 

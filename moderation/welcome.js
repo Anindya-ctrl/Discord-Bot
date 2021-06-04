@@ -13,7 +13,7 @@ function welcome(client) {
 
         welcomeMessageCache[guild.id] = [channel.id, welcomeMessage];
 
-        await connectToMongoDB().then(async mongoose => {
+        await connectToMongoDB('moderation').then(async mongoose => {
             try {
                 await welcomeSchema.findOneAndUpdate({
                     _id: guild.id,
