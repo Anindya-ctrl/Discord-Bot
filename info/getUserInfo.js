@@ -1,7 +1,8 @@
-const getRandomHexColor = require('../functions/getRandomHexColor');
+const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
+const getRandomHexColor = require('../functions/getRandomHexColor');
 
-function getUserInfo(client, Discord, message) {
+function getUserInfo(client, message) {
     const { mentions, guild, author } = message;
 
     const targetUser = mentions.users.first();
@@ -12,7 +13,7 @@ function getUserInfo(client, Discord, message) {
         const targetMember = guild.members.cache.get(targetUser.id);
         const targetMemberRoles = targetMember.roles.cache.map(role =>`${ role }`);
 
-        const InfoEmbed = new Discord.MessageEmbed()
+        const InfoEmbed = new MessageEmbed()
             .setTitle('**User Reveal :eyes:**')
             .setColor(getRandomHexColor())
             .setThumbnail(targetUser.avatarURL() || 'https://cdn.discordapp.com/embed/avatars/0.png')

@@ -1,9 +1,10 @@
 const axios = require('axios');
+const { MessageEmbed } = require('discord.js');
 const getRandomHexColor = require('../functions/getRandomHexColor');
 
 const getPercentageIfNumber = arg => typeof arg === 'number' ? `${ arg / 10000 }%` : arg;
 
-async function covid(client, Discord, message) {
+async function covid(client, message) {
     const { content, author, channel } = message;
     const initialMessage = await channel.send('Fetching data, please wait a moment...');
     
@@ -21,7 +22,7 @@ async function covid(client, Discord, message) {
     }
 
     const { cases, deaths, recovered, country, todayCases='N/A', todayDeaths='N/A', casesPerOneMillion='N/A', deathsPerOneMillion='N/A', testsPerOneMillion='N/A', totalTests='N/A' } = data;
-    const COVIDEmbed = new Discord.MessageEmbed()
+    const COVIDEmbed = new MessageEmbed()
         .setColor(getRandomHexColor())
         .setTitle(country ? `COVID-19 information for ${ country }` : 'Global information of COVID-19')
         .setThumbnail('https://www.fda.gov/files/covid19-1600x900.jpg')

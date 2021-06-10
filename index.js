@@ -42,27 +42,27 @@ const covid = require('./info/covid');
 const getUserInfo = require('./info/getUserInfo');
 const getServerInfo = require('./info/getServerInfo');
 
-command(client, [ 'covid', 'c' ], message => covid(client, Discord, message));
-command(client, 'reveal', message => getUserInfo(client, Discord, message));
-command(client, 'serverInfo', message => getServerInfo(client, Discord, message));
+command(client, [ 'covid', 'c' ], message => covid(client, message));
+command(client, ['reveal', 'r'], message => getUserInfo(client, message));
+command(client, ['serverInfo', 'si'], message => getServerInfo(client, message));
 
 // MUSIC
 const music = require('./music/musicMain');
 
-command(client, 'play', message => music(message));
+command(client, ['play', 'p'], message => music(message));
 
 // FUN
 const cat = require('./fun/cat');
 const dog = require('./fun/dog');
 const snipe = require('./fun/snipe');
 
-command(client, 'cat', message => cat(client, Discord, message));
-command(client, 'dog', message => dog(client, Discord, message));
-command(client, [ 's', 'snipe' ], message => snipe(Discord, message, deletedMessages));
+command(client, 'cat', message => cat(client, message));
+command(client, 'dog', message => dog(client, message));
+command(client, [ 's', 'snipe' ], message => snipe(message, deletedMessages));
 
 // OTHERS
 // const help = require('./others/help');
 
-// command(client, 'help', message => help(client, Discord, message));
+// command(client, 'help', message => help(client, message));
 
 client.login(process.env.BOT_TOKEN);

@@ -1,6 +1,7 @@
+const { MessageEmbed } = require('discord.js');
 const getRandomHexColor = require('../functions/getRandomHexColor');
 
-function snipe(Discord, message, deletedMessages) {
+function snipe(message, deletedMessages) {
     const { content, guild } = message;
     let deletedMessageNumber = content.split(/[ ]+/)[1];
     const deletedMessagesForThisGuild = deletedMessages.get(guild.id);
@@ -18,7 +19,7 @@ function snipe(Discord, message, deletedMessages) {
         sentAt,
     } = deletedMessage;
 
-    const snipeEmbed = new Discord.MessageEmbed()
+    const snipeEmbed = new MessageEmbed()
         .setColor(getRandomHexColor())
         .setTitle('Got exposed b- :smiling_face_with_tear:')
         .addField('Member', responsibleMember)

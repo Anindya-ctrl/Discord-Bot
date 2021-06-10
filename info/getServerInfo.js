@@ -1,11 +1,12 @@
+const { MessageEmbed } = require('discord.js');
 const getRandomHexColor = require("../functions/getRandomHexColor");
 
-function getServerInfo(client, Discord, message) {
+function getServerInfo(client, message) {
         const { guild, author } = message;
         const { name, owner, region, memberCount, createdAt, emojis, afkTimeout } = guild;
         const guildEmojis = emojis.cache.map(emoji => `${ emoji }`);
 
-        const InfoEmbed = new Discord.MessageEmbed()
+        const InfoEmbed = new MessageEmbed()
             .setTitle('**Server Info :face_with_monocle:**')
             .setThumbnail(guild.iconURL())
             .setColor(getRandomHexColor())
