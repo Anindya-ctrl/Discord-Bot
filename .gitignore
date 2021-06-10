@@ -1,10 +1,16 @@
 node_modules
 
+# SECRETS
+.env
+
 # COMING SOON
 /music/play.js
-.env
 /moderation/unban.js
 /others/help.js
 functions/validatePermissions.js
 functions/readCommands.js
 commands
+moderation/canvasWelcome.js
+schema
+images
+functions/onMemberJoin2.js

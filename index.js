@@ -7,7 +7,7 @@ const command = require('./functions/commandHandler');
 const { deletedMessages, catchDeletedMessages } = require('./functions/catchDeletedMessages');
 catchDeletedMessages(client);
 
-// require('dotenv').config();
+require('dotenv').config();
 
 client.on('ready', () => {
     console.log('ready to roll~');
@@ -31,8 +31,8 @@ const ban = require('./moderation/ban');
 // const unban = require('./moderation/unban');
 const welcome = require('./moderation/welcome');
 
-command(client, 'kick', message => kick(client, Discord, message));
-command(client, 'ban', message => ban(client, Discord, message));
+command(client, ['kick', 'k'], message => kick(client, message));
+command(client, ['ban', 'b'], message => ban(client, message));
 // command(client, 'unban', message => unban(message));
 welcome(client);
 
