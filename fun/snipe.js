@@ -2,9 +2,10 @@ const getRandomHexColor = require('../functions/getRandomHexColor');
 
 function snipe(Discord, message, deletedMessages) {
     const { content, guild } = message;
-    const deletedMessageNumber = content.split(/[ ]+/)[1];
+    let deletedMessageNumber = content.split(/[ ]+/)[1];
     const deletedMessagesForThisGuild = deletedMessages.get(guild.id);
 
+    if(!deletedMessageNumber) deletedMessageNumber = 1;
     if(!+deletedMessageNumber || deletedMessageNumber > 10 || deletedMessageNumber < 1) return message.reply('make sure to provide an integer number between 1 to 10~');
     if(!deletedMessagesForThisGuild || deletedMessagesForThisGuild.length < deletedMessageNumber) return message.reply('couldn\'t find that deleted message for this server, the bot must\'ve restarted and lost the data... :smiling_face_with_tear:');
 

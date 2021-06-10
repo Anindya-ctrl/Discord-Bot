@@ -7,7 +7,7 @@ const command = require('./functions/commandHandler');
 const { deletedMessages, catchDeletedMessages } = require('./functions/catchDeletedMessages');
 catchDeletedMessages(client);
 
-require('dotenv').config();
+// require('dotenv').config();
 
 client.on('ready', () => {
     console.log('ready to roll~');
