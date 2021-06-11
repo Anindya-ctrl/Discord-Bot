@@ -43,8 +43,8 @@ const getUserInfo = require('./info/getUserInfo');
 const getServerInfo = require('./info/getServerInfo');
 
 command(client, [ 'covid', 'c' ], message => covid(client, message));
-command(client, ['reveal', 'r'], message => getUserInfo(client, message));
 command(client, ['serverInfo', 'si'], message => getServerInfo(client, message));
+getUserInfo(client);
 
 // MUSIC
 const music = require('./music/musicMain');

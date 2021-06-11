@@ -1,22 +1,21 @@
 const { MessageEmbed } = require('discord.js');
+const command = require('../functions/commandHandler');
 const moment = require('moment');
 const getRandomHexColor = require('../functions/getRandomHexColor');
 
-function getUserInfo(client, message) {
-    const { mentions, guild, author } = message;
+function getUserInfo(client) {
+    command(client, ['reveal', 'r'], message => {
+        const { mentions, guild, author } = message;
+    
+        let targetUser = mentions.users.first() || author;
 
-    const targetUser = mentions.users.first();
-
-    if(!targetUser) {
-        message.reply('bruh... you actually didn\'t mention a valid member lol~');
-    } else {
         const targetMember = guild.members.cache.get(targetUser.id);
         const targetMemberRoles = targetMember.roles.cache.map(role =>`${ role }`);
 
         const InfoEmbed = new MessageEmbed()
             .setTitle('**User Reveal :eyes:**')
             .setColor(getRandomHexColor())
-            .setThumbnail(targetUser.avatarURL() || 'https://cdn.discordapp.com/embed/avatars/0.png')
+            .setThumbnail(targetUser.displayAvatarURL({ dynamic : true }) || 'https://cdn.discordapp.com/embed/avatars/0.png')
             .addField('Username', targetUser.username)
             .addField('Nickname', targetMember.nickname || 'N/A')
             .addField('Status', targetUser.presence.status)
@@ -29,7 +28,22 @@ function getUserInfo(client, message) {
             .setTimestamp();
 
         message.reply(InfoEmbed);
-    }
+    });
+
+    command(client, ['avatar', 'pfp'], message => {
+        const { mentions, guild, author } = message;
+    
+        const targetUser = mentions.users.first() || author;
+        const targetMember = guild.members.cache.get(targetUser.id);
+
+        const InfoEmbed = new MessageEmbed()
+            .setTitle(`**User Avatar of** ${ targetMember.user.tag }`)
+            .setColor(getRandomHexColor())
+            .setImage(targetUser.displayAvatarURL({ dynamic : true, size: 4096 }) || 'https://cdn.discordapp.com/embed/avatars/0.png')
+            .addField('Requested by', author)
+
+        message.reply(InfoEmbed);
+    });
 }
 
 module.exports = getUserInfo;
