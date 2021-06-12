@@ -1,39 +1,53 @@
 const deletedMessages = new Map();
 const moment = require('moment');
 
+const getAttachmentURLs = attachments => {
+    const iterableAttachments = attachments.array();
+    const attachmentURLs = [];
+
+    for(const attachment of iterableAttachments) {
+        attachmentURLs.push(attachment.url);
+    }
+
+    return attachmentURLs;
+}
+
 function catchDeletedMessages(client) {
     client.on('messageDelete', message => {
-        const sentAt = moment();
         
-        const { content, author, guild, attachments } = message;
+        const { content, author, guild, channel, attachments } = message;
         if(author.bot) return ;
-
-        const { id } = guild;
-        const deletedMessagesForThisGuild = deletedMessages.get(id);
+        
+        const { id: guildId } = guild;
+        const { name: channelName } = channel;
+        const deletedAt = moment();
+        const attachmentURLs = getAttachmentURLs(attachments);
+        const deletedMessagesForThisGuild = deletedMessages.get(guildId);
 
         const savableMessage = content && attachments.size ? {
             text: content,
-            attachmentURL: attachments.first().url,
-            sentAt,
+            attachmentURLs,
         } : !content && attachments.size ? {
-            attachmentURL: attachments.first().url,
-            sentAt,
+            attachmentURLs,
         } : {
             text: content,
-            sentAt,
         };
         
         if(deletedMessagesForThisGuild) {
             if(deletedMessagesForThisGuild.length >= 10) deletedMessagesForThisGuild.shift();
             
-            deletedMessages.set(id, [...deletedMessagesForThisGuild, {
+            deletedMessages.set(guildId, [...deletedMessagesForThisGuild, {
                 member: author,
                 message: savableMessage,
+                channelName,
+                deletedAt,
             }]);
         } else {
-            deletedMessages.set(id, [{
+            deletedMessages.set(guildId, [{
                 member: author,
                 message: savableMessage,
+                channelName,
+                deletedAt,
             }]);
         }
     });
