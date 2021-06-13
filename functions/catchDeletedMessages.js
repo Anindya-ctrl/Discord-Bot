@@ -17,12 +17,13 @@ function catchDeletedMessages(client) {
         
         const { content, author, guild, channel, attachments } = message;
         if(author.bot) return ;
-        
+
         const { id: guildId } = guild;
-        const { name: channelName } = channel;
-        const deletedAt = moment();
-        const attachmentURLs = getAttachmentURLs(attachments);
         const deletedMessagesForThisGuild = deletedMessages.get(guildId);
+        
+        const { name: channelName } = channel;
+        const attachmentURLs = getAttachmentURLs(attachments);
+        const deletedAt = moment();
 
         const savableMessage = content && attachments.size ? {
             text: content,

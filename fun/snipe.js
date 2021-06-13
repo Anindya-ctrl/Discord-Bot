@@ -36,7 +36,7 @@ function snipe(message, deletedMessages) {
 
     const snipeEmbed = new MessageEmbed()
         .setColor(getRandomHexColor())
-        .setAuthor(responsibleMember.username, responsibleMember.displayAvatarURL({ dynamic : true }))
+        .setAuthor(`${ responsibleMember.username }#${ responsibleMember.discriminator }`, responsibleMember.displayAvatarURL({ dynamic : true }))
         .setFooter(`Deleted from #${ channelName } • ${ deletedAt.fromNow() }`);
 
     message.reply(
