@@ -10,6 +10,7 @@ async function covid(client, message) {
     
     const countryName = content.split(/[ ]+/)[1];
     const fetchURL = countryName ? `https://coronavirus-19-api.herokuapp.com/countries/${ countryName.toLowerCase() }` : 'https://coronavirus-19-api.herokuapp.com/all';
+    const adviceForPublic = '[Advice for public](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public)';
     let data;
     
     await axios.get(fetchURL)
@@ -21,7 +22,19 @@ async function covid(client, message) {
         return message.reply('country not found, please make sure to provide a valid country name~');
     }
 
-    const { cases, deaths, recovered, country, todayCases='N/A', todayDeaths='N/A', casesPerOneMillion='N/A', deathsPerOneMillion='N/A', testsPerOneMillion='N/A', totalTests='N/A' } = data;
+    const {
+        cases,
+        deaths,
+        recovered,
+        country,
+        totalTests='N/A',
+        todayCases='N/A',
+        todayDeaths='N/A',
+        casesPerOneMillion='N/A',
+        deathsPerOneMillion='N/A',
+        testsPerOneMillion='N/A',
+    } = data;
+
     const COVIDEmbed = new MessageEmbed()
         .setColor(getRandomHexColor())
         .setTitle(country ? `COVID-19 information for ${ country }` : 'Global information of COVID-19')
@@ -29,18 +42,21 @@ async function covid(client, message) {
         .addField('Cases', cases, true)
         .addField('Deaths', deaths, true)
         .addField('Recovered', recovered, true)
-        .addField('Total tests', totalTests, true)
-        .addField('Total cases today', todayCases, true)
-        .addField('Total deaths today', todayDeaths, true)
-        .addField('percentage of cases', getPercentageIfNumber(casesPerOneMillion), true)
-        .addField('Percentage of deaths', getPercentageIfNumber(deathsPerOneMillion), true)
-        .addField('Percentage of tests', getPercentageIfNumber(testsPerOneMillion), true)
-        .addField('Requested by', author)
         .setFooter('Time', client.user.displayAvatarURL())
         .setTimestamp();
 
     initialMessage.delete();
-    channel.send(COVIDEmbed);
+    channel.send(
+        !countryName ? COVIDEmbed.addField('Let\'s stop covid together!', adviceForPublic).addField('Requested by', author) : COVIDEmbed
+            .addField('Total tests', totalTests, true)
+            .addField('Total cases today', todayCases, true)
+            .addField('Total deaths today', todayDeaths, true)
+            .addField('percentage of cases', getPercentageIfNumber(casesPerOneMillion), true)
+            .addField('Percentage of deaths', getPercentageIfNumber(deathsPerOneMillion), true)
+            .addField('Percentage of tests', getPercentageIfNumber(testsPerOneMillion), true)
+            .addField('Let\'s stop covid together!', adviceForPublic)
+            .addField('Requested by', author)
+    );
 }
 
 module.exports = covid;
