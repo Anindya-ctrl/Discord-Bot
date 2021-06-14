@@ -11,6 +11,5 @@ functions/validatePermissions.js
 functions/readCommands.js
 commands
 moderation/canvasWelcome.js
-schema
 images
 functions/onMemberJoin2.js
