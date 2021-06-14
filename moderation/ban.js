@@ -5,7 +5,7 @@ function ban(client, message) {
     const { member, content, mentions, author, guild } = message;
     
     if(!member.hasPermission('ADMINISTRATOR') && !member.hasPermission('BAN_MEMBERS')) {
-        return message.reply('you do not have the required permission to run this command');
+        return message.reply('you do not have the required permission to run this command~');
     }
 
     const targetUser = mentions.users.first();
