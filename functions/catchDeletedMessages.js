@@ -15,13 +15,12 @@ const getAttachmentURLs = attachments => {
 function catchDeletedMessages(client) {
     client.on('messageDelete', message => {
         
-        const { content, author, guild, channel, attachments } = message;
+        const { content, author, channel, attachments } = message;
         if(author.bot) return ;
 
-        const { id: guildId } = guild;
-        const deletedMessagesForThisGuild = deletedMessages.get(guildId);
+        const { id: channelId } = channel;
+        const deletedMessagesForThisChannel = deletedMessages.get(channelId);
         
-        const { name: channelName } = channel;
         const attachmentURLs = getAttachmentURLs(attachments);
         const deletedAt = moment();
 
@@ -34,20 +33,18 @@ function catchDeletedMessages(client) {
             text: content,
         };
         
-        if(deletedMessagesForThisGuild) {
-            if(deletedMessagesForThisGuild.length >= 10) deletedMessagesForThisGuild.shift();
+        if(deletedMessagesForThisChannel) {
+            if(deletedMessagesForThisChannel.length >= 10) deletedMessagesForThisChannel.shift();
             
-            deletedMessages.set(guildId, [...deletedMessagesForThisGuild, {
+            deletedMessages.set(channelId, [...deletedMessagesForThisChannel, {
                 member: author,
                 message: savableMessage,
-                channelName,
                 deletedAt,
             }]);
         } else {
-            deletedMessages.set(guildId, [{
+            deletedMessages.set(channelId, [{
                 member: author,
                 message: savableMessage,
-                channelName,
                 deletedAt,
             }]);
         }
