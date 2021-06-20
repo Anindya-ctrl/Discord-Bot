@@ -15,7 +15,7 @@ client.on('ready', async () => {
     
     client.user.setPresence({
         activity: {
-            name: 'in development',
+            name: 'default prefix is now ~ run ~sp <new_prefix> to add a custom one',
             type: 'PLAYING',
         },
     });
