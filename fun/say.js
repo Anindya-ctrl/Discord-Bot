@@ -24,7 +24,7 @@ function speak(client) {
                     switch(message.content) {
                         case 'sStop':
                             dispatcher.end();
-                            return message.react('✔️');
+                            return message.react('👌');
                         case 'sLeave':
                             return voiceChannel.leave();
                         default:
