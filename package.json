@@ -3,11 +3,13 @@
     "@discordjs/opus": "^0.5.0",
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
+    "discord-tts": "^1.2.0",
     "discord.js": "^12.5.3",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^4.3.0",
     "moment": "^2.29.1",
     "mongoose": "^5.12.12",
+    "redis": "^3.1.2",
     "ytdl-core": "^4.8.2"
   },
   "name": "cringegod69",
