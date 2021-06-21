@@ -8,7 +8,7 @@ const { loadPrefixes } = require('./functions/loadPrefixes');
 const { deletedMessages, catchDeletedMessages } = require('./functions/catchDeletedMessages');
 catchDeletedMessages(client);
 
-require('dotenv').config();
+// require('dotenv').config();
 
 client.on('ready', async () => {
     console.log('ready to roll~');
@@ -20,7 +20,7 @@ client.on('ready', async () => {
         },
     });
 
-    // await loadPrefixes(client);
+    await loadPrefixes(client);
 
     // TEST
     command(client, 'test', message => {
