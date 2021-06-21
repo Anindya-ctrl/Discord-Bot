@@ -30,14 +30,14 @@ client.on('ready', async () => {
     // MODERATION
     const kick = require('./moderation/kick');
     const ban = require('./moderation/ban');
-    const mute = require('./moderation/mute/mute');
+    // const mute = require('./moderation/mute/mute');
     // const unban = require('./moderation/unban');
     const welcome = require('./moderation/welcome');
     const setCustomPrefix = require('./moderation/setCustomPrefix');
     
     command(client, ['kick', 'k'], message => kick(client, message));
     command(client, ['ban', 'b'], message => ban(client, message));
-    mute(client);
+    // mute(client);
     // command(client, 'unban', message => unban(message));
     welcome(client);
     command(client, ['setPrefix', 'sp'], message => setCustomPrefix(message));

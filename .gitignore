@@ -4,12 +4,12 @@ node_modules
 .env
 
 # COMING SOON
-/music/play.js
-/moderation/unban.js
-/others/help.js
+music/play.js
+moderation/unban.js
+others/help.js
 functions/validatePermissions.js
 functions/readCommands.js
 commands
-moderation/canvasWelcome.js
 images
-functions/onMemberJoin2.js
+schema/AFKSchema.js
+info/afk.js
