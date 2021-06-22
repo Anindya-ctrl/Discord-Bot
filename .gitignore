@@ -11,5 +11,3 @@ functions/validatePermissions.js
 functions/readCommands.js
 commands
 images
-schema/AFKSchema.js
-info/afk.js

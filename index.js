@@ -5,6 +5,7 @@ client.setMaxListeners(1000);
 // FUNCTIONS
 const command = require('./functions/commandHandler');
 const { loadPrefixes } = require('./functions/loadPrefixes');
+const loadAFKMessages = require('./functions/loadAFKMessages');
 const { deletedMessages, catchDeletedMessages } = require('./functions/catchDeletedMessages');
 catchDeletedMessages(client);
 
@@ -21,6 +22,7 @@ client.on('ready', async () => {
     });
 
     await loadPrefixes(client);
+    await loadAFKMessages();
 
     // TEST
     command(client, 'test', message => {
@@ -46,12 +48,12 @@ client.on('ready', async () => {
     const covid = require('./info/covid');
     const getUserInfo = require('./info/getUserInfo');
     const getServerInfo = require('./info/getServerInfo');
-    // const afk = require('./info/afk');
+    const { afk } = require('./info/afk');
     
     command(client, [ 'covid', 'c' ], message => covid(client, message));
     command(client, ['serverInfo', 'si'], message => getServerInfo(client, message));
     getUserInfo(client);
-    // afk(client);
+    afk(client);
     
     // MUSIC
     const music = require('./music/musicMain');
