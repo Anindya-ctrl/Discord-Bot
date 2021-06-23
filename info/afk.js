@@ -5,13 +5,20 @@ const { customPrefixes } = require('../functions/loadPrefixes');
 const moment = require('moment');
 
 const AFKMessageCache = new Map();
+let recentRunsRecord = [];
 
 function afk(client) {
     // LISTEN FOR AFK MEMBER MESSAGE
     client.on('message', async message => {
         const { author, content, guild, member, channel } = message;
-        if(author.bot || content.startsWith(`${ customPrefixes[guild.id] }afk`)) return ;
         const keyId = `${ guild.id }${ author.id }`;
+
+        if(
+            author.bot ||
+            recentRunsRecord.includes(keyId) ||
+            content.startsWith(`${ customPrefixes[guild.id] }afk`) ||
+            content.startsWith(`${ customPrefixes[guild.id] }afk `)
+        ) return ;
     
         if(AFKMessageCache.has(keyId)) {
             AFKMessageCache.delete(keyId);
@@ -59,6 +66,15 @@ function afk(client) {
     command(client, 'afk', async message => {
         const { content, author, guild, member } = message;
         const keyId = `${ guild.id }${ author.id }`;
+        
+        if(recentRunsRecord.includes(keyId)) return message.reply('whoa there, too soon.');
+        recentRunsRecord.push(keyId);
+        console.log(recentRunsRecord);
+
+        setTimeout(() => {
+            recentRunsRecord = recentRunsRecord.filter(id => id !== keyId);
+            console.log(recentRunsRecord);
+        }, 8 * 1000);
 
         const AFKMessage = content.split(/[ ]+/).slice(1).join(' ') || 'AFK';
         if(AFKMessage.length > 500) return message.reply('please keep the afk message length within 500 characters~');
