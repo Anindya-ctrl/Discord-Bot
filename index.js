@@ -14,10 +14,15 @@ catchDeletedMessages(client);
 client.on('ready', async () => {
     console.log('ready to roll~');
     
+    let totalMembers = 0;
+    const guilds = client.guilds.cache.array();
+
+    for(const guild of guilds) totalMembers += +guild.memberCount;
+
     client.user.setPresence({
         activity: {
-            name: 'default prefix is now ~ run ~sp <new_prefix> to add a custom one',
-            type: 'PLAYING',
+            name: `${ guilds.length } guilds and ${ totalMembers } members`,
+            type: 'WATCHING',
         },
     });
 
