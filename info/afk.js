@@ -69,11 +69,9 @@ function afk(client) {
         
         if(recentRunsRecord.includes(keyId)) return message.reply('whoa there, too soon.');
         recentRunsRecord.push(keyId);
-        console.log(recentRunsRecord);
 
         setTimeout(() => {
             recentRunsRecord = recentRunsRecord.filter(id => id !== keyId);
-            console.log(recentRunsRecord);
         }, 8 * 1000);
 
         const AFKMessage = content.split(/[ ]+/).slice(1).join(' ') || 'AFK';
