@@ -2,6 +2,7 @@ const command = require('../functions/commandHandler');
 const connectToMongoDB = require('../functions/connectToMongoDB');
 const AFKSchema = require('../schema/AFKSchema');
 const { customPrefixes } = require('../functions/loadPrefixes');
+const moment = require('moment');
 
 const AFKMessageCache = new Map();
 
@@ -42,12 +43,14 @@ function afk(client) {
         const { author, content, mentions, guild, channel } = message;
         if(author.bot || content.includes('@everyone') || content.includes('@here')) return ;
 
-        
         mentions.users.forEach(user => {
             const keyId = `${ guild.id }${ user.id }`;
-
+            
             if(AFKMessageCache.has(keyId)) {
-                channel.send(`${ user.username } is afk: ${ AFKMessageCache.get(keyId) }`);
+                const { username, discriminator } = user;
+                const AFKMessageForThisMember = AFKMessageCache.get(keyId);
+
+                channel.send(`${ username }#${ discriminator } is afk: ${ AFKMessageForThisMember.AFKMessage } • ${ moment(AFKMessageForThisMember.at).fromNow() }`);
             }
         });
     });
@@ -60,7 +63,11 @@ function afk(client) {
         const AFKMessage = content.split(/[ ]+/).slice(1).join(' ') || 'AFK';
         if(AFKMessage.length > 500) return message.reply('please keep the afk message length within 500 characters~');
 
-        AFKMessageCache.set(keyId, AFKMessage);
+        const at = moment();
+        AFKMessageCache.set(keyId, {
+            AFKMessage,
+            at,
+        });
 
         await connectToMongoDB('info').then(async mongoose => {
             try {
@@ -69,6 +76,7 @@ function afk(client) {
                 }, {
                     _id: keyId,
                     AFKMessage,
+                    at,
                 }, {
                     upsert: true,
                     useFindAndModify: false

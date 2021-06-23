@@ -7,9 +7,12 @@ async function loadAFKMessages() {
         try {
             await AFKSchema.find({}).then(AFKDocs => {
                 AFKDocs.forEach(AFKDoc => {
-                    const { id, AFKMessage } = AFKDoc;
+                    const { id, AFKMessage, at } = AFKDoc;
     
-                    AFKMessageCache.set(id, AFKMessage);
+                    AFKMessageCache.set(id, {
+                        AFKMessage,
+                        at,
+                    });
                 });
             });
         } finally {

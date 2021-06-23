@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
-const reqField = {
+const reqStringField = {
     type: String,
     required: true,
 };
 
 const AFKSchema = mongoose.Schema({
-    _id: reqField,
-    AFKMessage: reqField,
+    _id: reqStringField,
+    AFKMessage: reqStringField,
+    at: {
+        type: Date,
+        required: true,
+    }
 });
 
 module.exports = mongoose.model('afk-messages', AFKSchema);
