@@ -14,9 +14,8 @@ const getAttachmentURLs = attachments => {
 
 function catchDeletedMessages(client) {
     client.on('messageDelete', message => {
-        
         const { content, author, channel, attachments } = message;
-        if(author.bot) return ;
+        if(author.bot || channel.type === 'dm') return ;
 
         const { id: channelId } = channel;
         const deletedMessagesForThisChannel = deletedMessages.get(channelId);

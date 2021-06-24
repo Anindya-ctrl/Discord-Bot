@@ -11,15 +11,17 @@ function afk(client) {
     // LISTEN FOR AFK MEMBER MESSAGE
     client.on('message', async message => {
         const { author, content, guild, member, channel } = message;
+        if(author.bot || channel.type === 'dm') return ;
+
         const keyId = `${ guild.id }${ author.id }`;
+        const prefixForThisGuild = customPrefixes[guild.id] || process.env.PREFIX;
 
         if(
-            author.bot ||
             recentRunsRecord.includes(keyId) ||
-            content.startsWith(`${ customPrefixes[guild.id] }afk`) ||
-            content.startsWith(`${ customPrefixes[guild.id] }afk `)
+            content.startsWith(`${ prefixForThisGuild }afk`) ||
+            content.startsWith(`${ prefixForThisGuild }afk `)
         ) return ;
-    
+
         if(AFKMessageCache.has(keyId)) {
             AFKMessageCache.delete(keyId);
         
@@ -49,7 +51,12 @@ function afk(client) {
     // LISTEN FOR AFK MEMBER MENTION
     client.on('message', message => {
         const { author, content, mentions, guild, channel } = message;
-        if(author.bot || content.includes('@everyone') || content.includes('@here')) return ;
+        if(
+            author.bot ||
+            channel.type === 'dm' ||
+            content.includes('@everyone') ||
+            content.includes('@here')
+        ) return ;
 
         mentions.users.forEach(user => {
             const keyId = `${ guild.id }${ user.id }`;

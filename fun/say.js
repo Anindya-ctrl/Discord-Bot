@@ -2,7 +2,7 @@ const discordTTS = require('discord-tts');
 const command = require('../functions/commandHandler');
 
 function speak(client) {
-    command(client, 'say', message => {
+    command(client, ['say', 'tts'], message => {
         const { member, content } = message;
         const voiceChannel = member.voice.channel;
         if(!voiceChannel) return message.reply('make sure to join a voice channel to run this command ;)');
