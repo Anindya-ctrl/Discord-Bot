@@ -4,6 +4,7 @@ client.setMaxListeners(1000);
 
 // FUNCTIONS
 const command = require('./functions/commandHandler');
+const reactOnOwnerMention = require('./functions/reactOnOwnerMention');
 const setBotPresence = require('./functions/setBotPresence');
 const { loadPrefixes } = require('./functions/loadPrefixes');
 const loadAFKMessages = require('./functions/loadAFKMessages');
@@ -16,8 +17,9 @@ client.on('ready', async () => {
     console.log('ready to roll~');
 
     setBotPresence(client);
-    await loadPrefixes(client);
+    reactOnOwnerMention(client);
     await loadAFKMessages();
+    await loadPrefixes(client);
 
     // TEST
     command(client, 'test', message => {
