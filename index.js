@@ -10,7 +10,7 @@ const loadAFKMessages = require('./functions/loadAFKMessages');
 const { deletedMessages, catchDeletedMessages } = require('./functions/catchDeletedMessages');
 catchDeletedMessages(client);
 
-require('dotenv').config();
+// require('dotenv').config();
 
 client.on('ready', async () => {
     console.log('ready to roll~');
@@ -67,9 +67,9 @@ client.on('ready', async () => {
     say(client);
 
     // OTHERS
-    // const help = require('./others/help');
+    const help = require('./others/help');
     
-    // command(client, 'help', message => help(client, message));
+    command(client, 'help', message => help(message));
 });
 
 
