@@ -69,7 +69,7 @@ client.on('ready', async () => {
     // OTHERS
     const help = require('./others/help');
     
-    command(client, 'help', message => help(message));
+    help(client);
 });
 
 

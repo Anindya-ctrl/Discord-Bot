@@ -7,7 +7,7 @@ function setBotPresence(client) {
     
         client.user.setPresence({
             activity: {
-                name: `${ guilds.length } guilds and ${ totalMembers } members`,
+                name: `${ guilds.length } guilds and ${ totalMembers } members | ${ process.env.PREFIX }help`,
                 type: 'WATCHING',
             },
         });
