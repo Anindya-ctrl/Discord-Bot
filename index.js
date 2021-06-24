@@ -4,28 +4,18 @@ client.setMaxListeners(1000);
 
 // FUNCTIONS
 const command = require('./functions/commandHandler');
+const setBotPresence = require('./functions/setBotPresence');
 const { loadPrefixes } = require('./functions/loadPrefixes');
 const loadAFKMessages = require('./functions/loadAFKMessages');
 const { deletedMessages, catchDeletedMessages } = require('./functions/catchDeletedMessages');
 catchDeletedMessages(client);
 
-// require('dotenv').config();
+require('dotenv').config();
 
 client.on('ready', async () => {
     console.log('ready to roll~');
-    
-    let totalMembers = 0;
-    const guilds = client.guilds.cache.array();
 
-    for(const guild of guilds) totalMembers += +guild.memberCount;
-
-    client.user.setPresence({
-        activity: {
-            name: `${ guilds.length } guilds and ${ totalMembers } members`,
-            type: 'WATCHING',
-        },
-    });
-
+    setBotPresence(client);
     await loadPrefixes(client);
     await loadAFKMessages();
 
@@ -84,3 +74,5 @@ client.on('ready', async () => {
 
 
 client.login(process.env.BOT_TOKEN);
+
+// https://discord.com/api/oauth2/authorize?client_id=844158625069137930&permissions=4294967287&scope=bot
