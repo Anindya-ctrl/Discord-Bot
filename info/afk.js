@@ -41,7 +41,8 @@ function afk(client) {
                 }
             }
 
-            channel.send(`Welcome back ${ author }, I've removed your afk.`);
+            channel.send(`Welcome back ${ author }, I've removed your afk.`)
+                .then(message => setTimeout(() => message.delete(), 8 * 1000));
         }
     });
 
@@ -72,7 +73,7 @@ function afk(client) {
 
         setTimeout(() => {
             recentRunsRecord = recentRunsRecord.filter(id => id !== keyId);
-        }, 8 * 1000);
+        }, 10 * 1000);
 
         const AFKMessage = content.split(/[ ]+/).slice(1).join(' ') || 'AFK';
         if(AFKMessage.length > 500) return message.reply('please keep the afk message length within 500 characters~');
