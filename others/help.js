@@ -17,7 +17,7 @@ help command can always be run with the default prefix for your convenience.
 __kick__ or __k__: kick a member from the server [*member mention as an argument*]
 __ban__ or __b__: ban a member from the server [*member mention as an argument*]
 __setPrefix__ or __sp__: set a custom prefix for the server [*new prefix as an argument*]
-__setWelcome__ or __sw__: set a welcome message for the newcomers [*the welcome message as am argument, <@> to ping the newcomer*]
+__setWelcome__ or __sw__: set a welcome message for the newcomers [*the welcome message as an argument, <@> to ping the newcomer*]
 
 ℹ️ **Info**
 __covid__ or __c__: get global COVID-19 status [*a country name as an argument to get info on a specific country*]
