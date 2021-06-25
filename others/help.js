@@ -14,10 +14,10 @@ function help(client) {
 help command can always be run with the default prefix for your convenience.
 
 🛡️ **Moderation**
-__kick__ or __k__: kick a member from the server
-__ban__ or __b__: ban a member from the server
-__setPrefix__ or __sp__: set a custom prefix for the server
-__setWelcome__ or __sw__: set a welcome message for the newcomers
+__kick__ or __k__: kick a member from the server [*pass in the member mention as an argument*]
+__ban__ or __b__: ban a member from the server [*pass in the member mention as an argument*]
+__setPrefix__ or __sp__: set a custom prefix for the server [*pass in the new prefix as an argument*]
+__setWelcome__ or __sw__: set a welcome message for the newcomers [*pass in the welcome message as am argument, <@> will ping the newcomer*]
 
 ℹ️ **Info**
 __covid__ or __c__: get global COVID-19 status [*pass in a country name as an argument to get info on a specific country*]
@@ -29,7 +29,7 @@ __afk__: set your afk (Away From Keyboard) message [*pass in the afk message as 
 🤪 **Fun**
 __cat__: get a random cat image
 __dog__: get a random dog image
-__say__ or __tts__: convert text to voice [*pass in the text as an argument*]
+__say__ or __tts__: convert text to voice (sStop to stop speaking and sLeave to leave the voice channel while the bot is connected) [*pass in the text as an argument*]
 __snipe__ or __s__: get 10 recent deleted messages per channel [*pass in an integer from 1 to 10 as an argument to get a specific one, no argument will be assumed as 1*]
 
 🎵 **Music**
