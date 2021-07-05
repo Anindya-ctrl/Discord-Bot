@@ -70,8 +70,10 @@ client.on('ready', async () => {
 
     // OTHERS
     const help = require('./others/help');
+    const eval = require('./others/eval');
     
     help(client);
+    command(client, 'eval', message => eval(message));
 });
 
 
