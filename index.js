@@ -68,6 +68,11 @@ client.on('ready', async () => {
     command(client, [ 's', 'snipe' ], message => snipe(message, deletedMessages));
     say(client);
 
+    // NSFW
+    const nhentai = require('./nsfw/nhentai');
+
+    command(client, [ 'nhentai', 'nh' ], message => nhentai(message));
+
     // OTHERS
     const help = require('./others/help');
     const eval = require('./others/eval');
