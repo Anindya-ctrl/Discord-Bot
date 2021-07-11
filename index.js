@@ -71,7 +71,7 @@ client.on('ready', async () => {
     // NSFW
     const nhentai = require('./nsfw/nhentai');
 
-    command(client, [ 'nhentai', 'nh' ], message => nhentai(message));
+    command(client, [ 'nhentai', 'nh' ], message => nhentai(client, message));
 
     // OTHERS
     const help = require('./others/help');
