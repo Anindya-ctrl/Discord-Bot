@@ -75,7 +75,6 @@ async function nhentai(client, message) {
                 }
             });
         });
-        console.log(doujin);
     }).catch(err => {
         console.error(err);
         initialMessage.delete();
