@@ -41,7 +41,12 @@ async function nhentai(client, message) {
             await message.react('⬅️');
             await message.react('➡️');
 
+            let timeOver = false;
+            setTimeout(() => timeOver = true, 60 * 60 * 1000);
+
             client.on('messageReactionAdd', (reaction, user) => {
+                if(timeOver) return ;
+
                 if(reaction.message.id === message.id && reaction.emoji.name === '⬅️') {
                     message.reactions.resolve('⬅️').users.remove(user.id);
                     currentPage !== 1 ? currentPage -= 1 : currentPage = pages.length;
