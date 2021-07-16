@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const { customPrefixes } = require('../functions/loadPrefixes');
 
 function help(client) {
-    client.on('message', message => {
+    client.on('message', async message => {
         const { content, guild, author } = message;
         const customPrefixForThisGuild = customPrefixes[guild?.id];
 
@@ -35,11 +35,14 @@ __snipe__ or __s__: get 10 recent deleted messages per channel [*integer from 1 
 🎵 **Music**
 __play__ or __p__: play audio of a youtube video [*youtube video link as an argument*]
 
-__**Note**__: This bot is in development and so, issues might occur (some commands might appear to be incomplete or messy and they are). Please wait for a few moments if it seems to have crashed. The developer is currently working on other stuff, so the bot will remain as it is for an uncertain amount of time. Also, the bot is hosted on heroku for free (without credit card), so it might go offline anytime. That's all, have fun! :)
+🔞 **NSFW**
+__nhentai__ or __nh__: search for a specific doujin with 6 digit code [*code as an argument*]
+
+__**Note**__: This bot is in development and so, issues might occur (some commands might appear to be incomplete and/or messy and they are). Please wait for a few moments if it seems to have crashed. It will stay unusable while being developed. Also, the bot is hosted on heroku for free (without credit card), so it might go offline anytime. That's all, have fun! :)
                 `)
                 .setTimestamp();
     
-            author.send(HelpEmbed);
+            await author.send(HelpEmbed);
             message.react('✅');
         }
     });

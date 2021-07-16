@@ -5,6 +5,7 @@ client.setMaxListeners(1000);
 // FUNCTIONS
 const command = require('./functions/commandHandler');
 const reactOnOwnerMention = require('./functions/reactOnOwnerMention');
+const sendMessageOnNewServerJoin = require('./functions/sendMessageOnNewServerJoin');
 const setBotPresence = require('./functions/setBotPresence');
 const { loadPrefixes } = require('./functions/loadPrefixes');
 const loadAFKMessages = require('./functions/loadAFKMessages');
@@ -18,6 +19,7 @@ client.on('ready', async () => {
 
     setBotPresence(client);
     reactOnOwnerMention(client);
+    sendMessageOnNewServerJoin(client);
     await loadAFKMessages();
     await loadPrefixes(client);
 
@@ -31,14 +33,14 @@ client.on('ready', async () => {
     const ban = require('./moderation/ban');
     // const mute = require('./moderation/mute/mute');
     // const unban = require('./moderation/unban');
-    const welcome = require('./moderation/welcome');
+    // const welcome = require('./moderation/welcome');
     const setCustomPrefix = require('./moderation/setCustomPrefix');
     
     command(client, ['kick', 'k'], message => kick(client, message));
     command(client, ['ban', 'b'], message => ban(client, message));
     // mute(client);
     // command(client, 'unban', message => unban(message));
-    welcome(client);
+    // welcome(client);
     command(client, ['setPrefix', 'sp'], message => setCustomPrefix(message));
     
     // INFO
