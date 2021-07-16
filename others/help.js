@@ -37,7 +37,7 @@ __snipe__ or __s__: get 10 recent deleted messages per channel [*integer from 1 
 __play__ or __p__: play audio of a youtube video [*youtube video link as an argument*]
 
 🔞 **NSFW**
-__nhentai__ or __nh__: search for a specific doujin with 6 digit code [*code as an argument*]
+__nhentai__ or __nh__: search for a specific doujin with 6 digit code [*code as an argument, and make sure to run in a nsfw channel*]
 
 __**Note**__: This bot is in development and so, issues might occur (some commands might appear to be incomplete and/or messy and they are). Please wait for a few moments if it seems to have crashed. It will stay unusable while being developed. Also, the bot is hosted on heroku for free (without credit card), so it might go offline anytime. That's all, have fun! :)
                 `)
