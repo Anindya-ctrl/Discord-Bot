@@ -28,7 +28,7 @@ function CommandBase(client, commandOptions) {
     // LISTEN FOR MESSAGE EVENTS
     client.on('message', message => {
         const { content, member, guild } = message;
-        const PREFIX = customPrefixes[guild.id] || process.env.PREFIX;
+        const PREFIX = customPrefixes[guild?.id] || process.env.PREFIX;
 
         for(const alias of aliases) {
             const command = `${ PREFIX }${ alias }`;
