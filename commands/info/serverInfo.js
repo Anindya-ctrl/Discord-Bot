@@ -1,7 +1,9 @@
 const { MessageEmbed } = require('discord.js');
-const getRandomHexColor = require("../functions/getRandomHexColor");
+const getRandomHexColor = require('../../functions/getRandomHexColor');
 
-function getServerInfo(client, message) {
+module.exports = {
+    aliases: ['serverInfo', 'sInfo', 'si'],
+    execute: message =>  {
         const { guild, author } = message;
         const { name, owner, region, memberCount, createdAt, emojis, roles, afkTimeout } = guild;
 
@@ -22,11 +24,9 @@ function getServerInfo(client, message) {
             .addField('AFK timeout', `${ afkTimeout / 60 }min`, true)
             .addField(`Emojis(${ guildEmojis.length })`, guildEmojis.length && guildEmojis.length <= 10 ? joinedGuildEmojis : guildEmojis.length > 10 ? `${ guildEmojis.slice(0, 10) }... and ${ guildEmojis.length - 10 } more.` : 'N/A')
             .addField(`Roles(${ guildRoles.length })`, guildRoles.length && guildRoles.length <= 10 ? joinedGuildRoles : guildRoles.length > 10 ? `${ guildRoles.slice(0, 10) }... and ${ guildRoles.length - 10 } more.` : 'N/A')
-            .addField('Requested by', author)
-            .setFooter('Time', client.user.displayAvatarURL())
+            .setFooter(`Requested by • ${ author.tag }`)
             .setTimestamp();
 
             message.reply(InfoEmbed);
-}
-
-module.exports = getServerInfo;
+    }
+};

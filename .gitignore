@@ -8,5 +8,4 @@ music/play.js
 moderation/unban.js
 functions/validatePermissions.js
 functions/readCommands.js
-commands
 images

@@ -68,14 +68,8 @@ client.on('ready', async () => {
     command(client, ['setPrefix', 'sp'], message => setCustomPrefix(message));
     
     // INFO
-    const covid = require('./info/covid');
-    const getUserInfo = require('./info/getUserInfo');
-    const getServerInfo = require('./info/getServerInfo');
     const { afk } = require('./info/afk');
     
-    command(client, [ 'covid', 'c' ], message => covid(client, message));
-    command(client, ['serverInfo', 'si'], message => getServerInfo(client, message));
-    getUserInfo(client);
     afk(client);
     
     // MUSIC
