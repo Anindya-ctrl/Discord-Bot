@@ -1,6 +1,8 @@
 const { Client } = require('discord.js');
 const client = new Client();
 client.setMaxListeners(1000);
+const path = require('path');
+const fs = require('fs');
 
 // FUNCTIONS
 const command = require('./functions/commandHandler');
@@ -16,6 +18,28 @@ catchDeletedMessages(client);
 
 client.on('ready', async () => {
     console.log('ready to roll~');
+    
+    const commandsDirectory = 'commands';
+    const baseFile = 'CommandBase.js';
+    const CommandBase = require('./commands/CommandBase');
+    
+    function readCommands(commandsDirectory) {
+        const commandFiles = fs.readdirSync(path.join(__dirname, commandsDirectory));
+
+        for(const commandFile of commandFiles) {
+            const currentCommandFilePath =path.join(__dirname, commandsDirectory, commandFile);
+            const stat = fs.lstatSync(currentCommandFilePath);
+
+            if(stat.isDirectory()) {
+                readCommands(path.join(commandsDirectory, commandFile))
+            } else if(commandFile !== baseFile) {
+                const commandOptions = require(currentCommandFilePath);
+
+                CommandBase(client, commandOptions);
+            }
+        }
+    }
+    readCommands(commandsDirectory);
 
     setBotPresence(client);
     reactOnOwnerMention(client);
@@ -84,7 +108,6 @@ client.on('ready', async () => {
     help(client);
     command(client, 'eval', message => eval(message));
 });
-
 
 client.login(process.env.BOT_TOKEN);
 
