@@ -1,6 +1,6 @@
 const { customPrefixes } = require('../functions/loadPrefixes');
 const validatePermissions = require('../functions/validatePermissions');
-require('dotenv').config();
+// require('dotenv').config();
 
 function CommandBase(client, commandOptions) {
     let {
