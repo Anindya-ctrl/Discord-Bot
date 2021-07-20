@@ -2,6 +2,8 @@ const { customPrefixes } = require('../functions/loadPrefixes');
 const validatePermissions = require('../functions/validatePermissions');
 // require('dotenv').config();
 
+let recentRunRecords = [];
+
 function CommandBase(client, commandOptions) {
     let {
         aliases,
@@ -11,6 +13,8 @@ function CommandBase(client, commandOptions) {
         permissionError = 'you don\'t have the required permission(s) to run this command~',
         requiredRoles = [],
         requiredPermisions = [],
+        cooldown = 0,
+        cooldownMessage = 'whoa there, too soon.',
         execute,
     } = commandOptions;
 
@@ -27,7 +31,9 @@ function CommandBase(client, commandOptions) {
 
     // LISTEN FOR MESSAGE EVENTS
     client.on('message', message => {
-        const { content, member, guild } = message;
+        const { author, channel, content, member, guild } = message;
+        if(author.bot || channel.type === 'dm') return ;
+
         const PREFIX = customPrefixes[guild?.id] || process.env.PREFIX;
 
         for(const alias of aliases) {
@@ -48,13 +54,26 @@ function CommandBase(client, commandOptions) {
 
                     if(!role || !member.roles.cache.has(role.id)) return message.reply(`you must have a **${ requiredRole }** role to run this command~`);
                 }
-
+                
                 const arguments = content.split(/[ ]+/).slice(1);
-
+                
                 // COMPLAIN IF THE NUMBER OF PROVIED ARGUMENTS IS MORE OR LESS THAN NEEDED
                 if(arguments.length < minArguments || (
                     maxArguments !== null && arguments.length > maxArguments
-                )) return message.reply(`the provided syntax is incorrect, run the command like this \`${ command } ${ expectedArguments }\``);
+                    )) return message.reply(`the provided syntax is incorrect, run the command like this \`${ command } ${ expectedArguments }\``);
+
+                // HANDLE COOLDOWN
+                const cooldownKey = `${ guild.id }${ author.id }-${ aliases.join('-') }`;
+                if(cooldown > 0 && recentRunRecords.includes(cooldownKey)) return message.reply(cooldownMessage);
+
+                if(cooldown > 0) {
+                    recentRunRecords.push(cooldownKey);
+                    setTimeout(() => (
+                        recentRunRecords = recentRunRecords.filter(
+                            recentRunRecord => recentRunRecord !== cooldownKey
+                        )
+                    ), cooldown * 1000);
+                }
 
                 // RUN THE CALLBACK
                 return execute(message, arguments, client);
@@ -63,4 +82,7 @@ function CommandBase(client, commandOptions) {
     });
 }
 
-module.exports = CommandBase;
+module.exports = {
+    recentRunRecords,
+    CommandBase
+};

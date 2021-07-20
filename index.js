@@ -18,11 +18,17 @@ catchDeletedMessages(client);
 
 client.on('ready', async () => {
     console.log('ready to roll~');
-    
+
+    setBotPresence(client);
+    reactOnOwnerMention(client);
+    sendMessageOnNewServerJoin(client);
+    await loadAFKMessages();
+    await loadPrefixes(client);
+
     const commandsDirectory = 'commands';
     const baseFile = 'CommandBase.js';
-    const CommandBase = require('./commands/CommandBase');
-    
+    const { CommandBase } = require('./commands/CommandBase');
+
     function readCommands(commandsDirectory) {
         const commandFiles = fs.readdirSync(path.join(__dirname, commandsDirectory));
 
@@ -41,37 +47,18 @@ client.on('ready', async () => {
     }
     readCommands(commandsDirectory);
 
-    setBotPresence(client);
-    reactOnOwnerMention(client);
-    sendMessageOnNewServerJoin(client);
-    await loadAFKMessages();
-    await loadPrefixes(client);
-
-    // TEST
-    command(client, 'test', message => {
-        message.channel.send('working~');
-    });
-    
     // MODERATION
-    const kick = require('./moderation/kick');
-    const ban = require('./moderation/ban');
-    // const mute = require('./moderation/mute/mute');
-    // const unban = require('./moderation/unban');
     // const welcome = require('./moderation/welcome');
     const setCustomPrefix = require('./moderation/setCustomPrefix');
-    
-    command(client, ['kick', 'k'], message => kick(client, message));
-    command(client, ['ban', 'b'], message => ban(client, message));
-    // mute(client);
-    // command(client, 'unban', message => unban(message));
+
     // welcome(client);
     command(client, ['setPrefix', 'sp'], message => setCustomPrefix(message));
-    
+
     // INFO
     const { afk } = require('./info/afk');
-    
+
     afk(client);
-    
+
     // MUSIC
     const music = require('./music/musicMain');
     

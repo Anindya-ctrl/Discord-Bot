@@ -6,6 +6,8 @@ module.exports = {
     permissionError: 'you don\'t have the required permission(s) to run this command~',
     requiredRoles: [],
     requiredPermisions: [],
+    cooldown = 0,
+    cooldownMessage = 'whoa there, too soon.',
     execute: (message, arguments, client) =>  {
 
     }

@@ -1,11 +1,10 @@
-const command = require('../functions/commandHandler');
 const connectToMongoDB = require('../functions/connectToMongoDB');
 const AFKSchema = require('../schema/AFKSchema');
+const { recentRunRecords } = require('../commands/CommandBase');
 const { customPrefixes } = require('../functions/loadPrefixes');
 const moment = require('moment');
 
 const AFKMessageCache = new Map();
-let recentRunsRecord = [];
 
 function afk(client) {
     // LISTEN FOR AFK MEMBER MESSAGE
@@ -17,7 +16,7 @@ function afk(client) {
         const prefixForThisGuild = customPrefixes[guild.id] || process.env.PREFIX;
 
         if(
-            recentRunsRecord.includes(keyId) ||
+            recentRunRecords.includes(`${ keyId }-afk`) ||
             content.startsWith(`${ prefixForThisGuild }afk`) ||
             content.startsWith(`${ prefixForThisGuild }afk `)
         ) return ;
@@ -66,55 +65,6 @@ function afk(client) {
                 const AFKMessageForThisMember = AFKMessageCache.get(keyId);
 
                 channel.send(`${ username }#${ discriminator } is afk: ${ AFKMessageForThisMember.AFKMessage } • ${ moment(AFKMessageForThisMember.at).fromNow() }`);
-            }
-        });
-    });
-
-    // SET AFK
-    command(client, 'afk', async message => {
-        const { content, author, guild, member } = message;
-        const keyId = `${ guild.id }${ author.id }`;
-        
-        if(recentRunsRecord.includes(keyId)) return message.reply('whoa there, too soon.');
-        recentRunsRecord.push(keyId);
-
-        setTimeout(() => {
-            recentRunsRecord = recentRunsRecord.filter(id => id !== keyId);
-        }, 10 * 1000);
-
-        const AFKMessage = content.split(/[ ]+/).slice(1).join(' ') || 'AFK';
-        if(AFKMessage.length > 500) return message.reply('please keep the afk message length within 500 characters~');
-
-        const at = moment();
-        AFKMessageCache.set(keyId, {
-            AFKMessage,
-            at,
-        });
-
-        await connectToMongoDB('info').then(async mongoose => {
-            try {
-                await AFKSchema.findOneAndUpdate({
-                    _id: keyId,
-                }, {
-                    _id: keyId,
-                    AFKMessage,
-                    at,
-                }, {
-                    upsert: true,
-                    useFindAndModify: false
-                });
-                
-                const { nickname, user } = member;
-                
-                if(nickname && !nickname.startsWith('[AFK] ')) {
-                    member.setNickname(`[AFK] ${ nickname }`).catch(err => {});
-                } else if (!nickname && !user.username.startsWith('[AFK] ')) {
-                    member.setNickname(`[AFK] ${ user.username }`).catch(err => {});
-                }
-
-                message.reply(`you are now AFK: ${ AFKMessage }`);
-            } finally {
-                mongoose.connection.close();
             }
         });
     });
