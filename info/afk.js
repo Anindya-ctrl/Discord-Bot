@@ -1,6 +1,5 @@
 const connectToMongoDB = require('../functions/connectToMongoDB');
 const AFKSchema = require('../schema/AFKSchema');
-const { recentRunRecords } = require('../commands/CommandBase');
 const { customPrefixes } = require('../functions/loadPrefixes');
 const moment = require('moment');
 
@@ -16,7 +15,6 @@ function afk(client) {
         const prefixForThisGuild = customPrefixes[guild.id] || process.env.PREFIX;
 
         if(
-            recentRunRecords.includes(`${ keyId }-afk`) ||
             content.startsWith(`${ prefixForThisGuild }afk`) ||
             content.startsWith(`${ prefixForThisGuild }afk `)
         ) return ;
