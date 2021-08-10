@@ -9,13 +9,12 @@
     "ffmpeg-static": "^4.3.0",
     "moment": "^2.29.1",
     "mongoose": "^5.12.12",
-    "nhentai-api": "^3.0.2",
+    "nhentai.js-api": "^3.0.3",
     "redis": "^3.1.2",
     "ytdl-core": "^4.8.2"
   },
-  "name": "cringegod69",
+  "name": "discord-bot",
   "version": "1.0.0",
-  "description": "An all-rounder bot",
   "main": "index.js",
   "devDependencies": {
     "dotenv": "^9.0.2",

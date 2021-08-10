@@ -77,11 +77,6 @@ client.on('ready', async () => {
     say(client);
     command(client, '~', message => nqn(client, message));
 
-    // NSFW
-    const nhentai = require('./nsfw/nhentai');
-
-    command(client, [ 'nhentai', 'nh' ], message => nhentai(client, message));
-
     // OTHERS
     const help = require('./others/help');
     const eval = require('./others/eval');
