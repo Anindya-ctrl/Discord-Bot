@@ -32,6 +32,7 @@ module.exports = {
                 return res;
             }, []).join(', ');
             const embedImage = images[currentPage - 1];
+            const uploadedOn = `Uploaded on ${ new Date(uploaded).toString().slice(0, 15) }`;
 
             const replyEmbed = new MessageEmbed()
                 .setColor(getRandomHexColor())
@@ -42,7 +43,7 @@ module.exports = {
                 .addField('Artist(s)', embedArtists)
                 // .addField('Favorites', favorites)
                 .setImage(embedImage)
-                .setFooter(`Page: ${ currentPage }/${ images.length } • Uploaded in ${ new Date(uploaded) }`);
+                .setFooter(`Page: ${ currentPage }/${ images.length } • ${ uploadedOn }`);
 
             await initialMessage.delete();
             channel.send(replyEmbed).then(async message => {
@@ -69,7 +70,7 @@ module.exports = {
                                 .addField('Code', id)
                                 // .addField('Favorites', favorites)
                                 .setImage(images[currentPage - 1])
-                                .setFooter(`Page: ${ currentPage }/${ images.length } • Uploaded in ${ new Date(uploaded) }`)
+                                .setFooter(`Page: ${ currentPage }/${ images.length } • ${ uploadedOn }`)
                         );
                     } else if(reaction.message.id === message.id && reaction.emoji.name === '➡️') {
                         message.reactions.resolve('➡️').users.remove(user.id);
@@ -85,7 +86,7 @@ module.exports = {
                                 .addField('Code', id)
                                 // .addField('Favorites', favorites)
                                 .setImage(images[currentPage - 1])
-                                .setFooter(`Page: ${ currentPage }/${ images.length } • Uploaded in ${ new Date(uploaded) }`)
+                                .setFooter(`Page: ${ currentPage }/${ images.length } • ${ uploadedOn }`)
                         );
                     }
                 });
