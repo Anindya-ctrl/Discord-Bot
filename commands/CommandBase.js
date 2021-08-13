@@ -1,12 +1,12 @@
 const { customPrefixes } = require('../functions/loadPrefixes');
 const validatePermissions = require('../functions/validatePermissions');
-// require('dotenv').config();
 
 let recentRunRecords = [];
 
 function CommandBase(client, commandOptions) {
     let {
         aliases,
+        description,
         minArguments = 0,
         maxArguments = null,
         expectedArguments = '',
@@ -58,9 +58,20 @@ function CommandBase(client, commandOptions) {
                 const arguments = content.split(/[ ]+/).slice(1);
                 
                 // COMPLAIN IF THE NUMBER OF PROVIED ARGUMENTS IS MORE OR LESS THAN NEEDED
-                if(arguments.length < minArguments || (
-                    maxArguments !== null && arguments.length > maxArguments
-                    )) return message.reply(`the provided syntax is incorrect, run the command like this \`${ command } ${ expectedArguments }\``);
+                if(arguments.length < minArguments) return message.reply(`
+\`\`\`
+${ content }
+    ^^^^^^^^
+Uncaught SyntaxError: ${ command } command requires additional argument(s). Correct Syntax: ${ command } ${ expectedArguments }
+\`\`\`
+                `);
+                if(maxArguments !== null && arguments.length > maxArguments) return message.reply(`
+\`\`\`
+${ content }
+    ^^^^^^^^
+Uncaught SyntaxError: Too many arguments. Correct Syntax: ${ command } ${ expectedArguments }
+\`\`\`
+                `);
 
                 // HANDLE COOLDOWN
                 const cooldownKey = `${ guild.id }${ author.id }-${ aliases.join('-') }`;

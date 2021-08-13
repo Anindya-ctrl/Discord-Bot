@@ -65,15 +65,9 @@ client.on('ready', async () => {
     command(client, ['play', 'p'], message => music(message));
     
     // FUN
-    const cat = require('./fun/cat');
-    const dog = require('./fun/dog');
-    const snipe = require('./fun/snipe');
     const say = require('./fun/say');
     const nqn = require('./fun/nqn');
     
-    command(client, 'cat', message => cat(client, message));
-    command(client, 'dog', message => dog(client, message));
-    command(client, [ 's', 'snipe' ], message => snipe(message, deletedMessages));
     say(client);
     command(client, '~', message => nqn(client, message));
 

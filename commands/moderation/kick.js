@@ -9,6 +9,7 @@ module.exports = {
         const { mentions, author, guild } = message;
         
         const targetUser = mentions.users.first();
+        if(!targetUser) return message.reply('make sure to mention a member to kick~');
 
         const reason = arguments.join(' ').replace(MessageMentions.USERS_PATTERN, '').trim();
         if(reason.length > 1000) return message.reply('please keep the reason within 1000 characters~');
