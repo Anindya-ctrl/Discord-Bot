@@ -26,11 +26,11 @@ module.exports = {
             const embedTags = tags.tags.reduce((res, { name, amountString }) => {
                 res.push(`${ name }(${ amountString })`);
                 return res;
-            }, []).join(', ');
+            }, []).join(', ') || 'N/A';
             const embedArtists = tags.artists.reduce((res, { name, amount }) => {
                 res.push(`${ name }(${ amount })`);
                 return res;
-            }, []).join(', ');
+            }, []).join(', ') || 'N/A';
             const embedImage = images[currentPage - 1];
             const uploadedOn = `Uploaded on ${ new Date(uploaded).toString().slice(0, 15) }`;
 
